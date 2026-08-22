@@ -1461,7 +1461,7 @@ void flip_display(void (*render_func)(unsigned int *)) {
     render_func((unsigned int *)draw_cached);
 
     sceKernelDcacheWritebackRange(draw_cached, BUFFER_SIZE);
-    sceDisplaySetFrameBuf(draw_uncached, BUFFER_WIDTH, PSP_DISPLAY_PIXEL_FORMAT_8888, PSP_DISPLAY_SETBUF_IMMEDIATE);
+    sceDisplaySetFrameBuf(draw_uncached, BUFFER_WIDTH, PSP_DISPLAY_PIXEL_FORMAT_8888, PSP_DISPLAY_SETBUF_NEXTFRAME);
     sceDisplayWaitVblankStart();
 
     current_buffer = 1 - current_buffer;
@@ -1475,7 +1475,7 @@ int main(int argc, char *argv[]) {
     sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 
     sceDisplaySetMode(0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    sceDisplaySetFrameBuf(VRAM_UNCACHED_0, BUFFER_WIDTH, PSP_DISPLAY_PIXEL_FORMAT_8888, PSP_DISPLAY_SETBUF_IMMEDIATE);
+    sceDisplaySetFrameBuf(VRAM_UNCACHED_0, BUFFER_WIDTH, PSP_DISPLAY_PIXEL_FORMAT_8888, PSP_DISPLAY_SETBUF_NEXTFRAME);
 
     memset(base_dir, 0, sizeof(base_dir));
     if (getcwd(base_dir, sizeof(base_dir) - 1) == NULL || strlen(base_dir) == 0) {
